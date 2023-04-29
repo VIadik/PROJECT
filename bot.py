@@ -12,6 +12,7 @@ dp = Dispatcher(bot)
 async def doc_handler(message: types.Message):
     if document := message.document:
         await document.download()
+        await bot.send_document(message.from_user.id, ('archive.zip', open("files/archive.zip", "rb")))
 
 
 @dp.message_handler(commands=['start'])
