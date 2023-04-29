@@ -2,6 +2,17 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+
+button_hi = KeyboardButton('Привет! 👋')
+button_archive = KeyboardButton('Сжать файл ')
+button_pdf = KeyboardButton('Собрать фото в pdf')
+
+greet_kb = ReplyKeyboardMarkup()
+greet_kb.add(button_hi)
+greet_kb.add(button_archive)
+greet_kb.add(button_pdf)
+
 from config import TOKEN
 
 bot = Bot(token=TOKEN)
@@ -17,7 +28,7 @@ async def doc_handler(message: types.Message):
 
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
-    await message.reply("Привет!\nНапиши мне что-нибудь!")
+    await message.reply("Привет!\nНапиши мне что-нибудь!", reply_markup=greet_kb)
 
 
 @dp.message_handler(commands=['help'])
