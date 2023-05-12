@@ -1,7 +1,12 @@
 from PIL import Image
 
-images = [Image.open("photos/" + f) for f in ["file_53.jpg"]]
+import config
+import os
 
-pdf_path = "documents/pdf.pdf"
+files = sorted(os.listdir(f"telegram-bot-api/bin/{config.TOKEN}/photos/"), key=lambda x: int(x[5:-4]))
+
+images = [Image.open(f"telegram-bot-api/bin/{config.TOKEN}/photos/{files[-1]}")]
+
+pdf_path = "data/doc.pdf"
 
 images[0].save(pdf_path, "PDF", resolution=100.0, save_all=True, append_images=images[1:])
